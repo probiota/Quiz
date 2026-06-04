@@ -28,3 +28,33 @@ export async function GET(req: Request) {
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }
+
+export async function DELETE(req: Request) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get('id');
+
+    if (!id) {
+      return NextResponse.json({ error: "Lead ID is required" }, { status: 400 });
+    }
+
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL === "placeholder_supabase_url") {
+      return NextResponse.json({ error: "Supabase not configured" }, { status: 500 });
+    }
+
+    const { error } = await supabaseAdmin
+      .from("leads")
+      .delete()
+      .eq("id", id);
+
+    if (error) {
+      console.error("Supabase error deleting lead:", error);
+      return NextResponse.json({ error: "Failed to delete lead" }, { status: 500 });
+    }
+
+    return NextResponse.json({ success: true, message: "Lead deleted successfully" });
+  } catch (error) {
+    console.error("API /admin/leads DELETE error:", error);
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+  }
+}

@@ -32,7 +32,8 @@ export type AgeGroup = '18-24' | '25-34' | '35-44' | '45-54' | '55+';
 export type Gender = 'Male' | 'Female' | 'Prefer not to say';
 
 export interface LeadFormData {
-  full_name: string;
+  first_name: string;
+  last_name: string;
   email: string;
   phone: string;
   age_group: AgeGroup;

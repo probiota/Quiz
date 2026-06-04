@@ -41,7 +41,7 @@ export default function ResultsPage() {
     return <div className="min-h-screen bg-surface flex items-center justify-center">Loading...</div>;
   }
 
-  const name = state.leadData ? state.leadData.full_name.split(" ")[0] : "Guest";
+  const name = state.leadData ? state.leadData.first_name : "Guest";
   const email = state.leadData ? state.leadData.email : "your@email.com";
   const emailConsent = state.leadData ? state.leadData.email_consent : false;
 

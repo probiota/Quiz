@@ -39,8 +39,8 @@ export const questions = [
     text: "How many hours do you spend looking at screens daily?",
     options: [
       { text: "Less than 2 hours", scores: {} },
-      { text: "2–4 hours", scores: { eye: 1 } },
-      { text: "4–8 hours", scores: { eye: 2 } },
+      { text: "2-4 hours", scores: { eye: 1 } },
+      { text: "4-8 hours", scores: { eye: 2 } },
       { text: "8+ hours", scores: { eye: 3 } }
     ]
   },
@@ -90,13 +90,13 @@ export const questions = [
     id: 9,
     text: "What is your primary health or fitness goal?",
     options: [
-      { text: "Weight Management", scores: { general: 1 }, goalTag: "Weight Management" },
-      { text: "Muscle Gain", scores: { recovery: 2 }, goalTag: "Muscle Gain" },
-      { text: "Better Recovery", scores: { recovery: 3 }, goalTag: "Better Recovery" },
-      { text: "Better Heart Health", scores: { omega: 3 }, goalTag: "Better Heart Health" },
-      { text: "Better Digestion", scores: { gut: 3 }, goalTag: "Better Digestion" },
-      { text: "Better Sleep", scores: { sleep: 3 }, goalTag: "Better Sleep" },
-      { text: "Better Overall Wellness", scores: { general: 3 }, goalTag: "Better Overall Wellness" }
+      { text: "Weight Management", scores: { general: 5 }, goalTag: "Weight Management" },
+      { text: "Muscle Gain", scores: { recovery: 5 }, goalTag: "Muscle Gain" },
+      { text: "Better Recovery", scores: { recovery: 6 }, goalTag: "Better Recovery" },
+      { text: "Better Heart Health", scores: { omega: 6 }, goalTag: "Better Heart Health" },
+      { text: "Better Digestion", scores: { gut: 5 }, goalTag: "Better Digestion" },
+      { text: "Better Sleep", scores: { sleep: 6 }, goalTag: "Better Sleep" },
+      { text: "Better Overall Wellness", scores: { general: 5 }, goalTag: "Better Overall Wellness" }
     ]
   },
   {

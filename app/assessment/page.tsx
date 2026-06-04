@@ -83,15 +83,26 @@ export default function AssessmentPage() {
       lifestyle_type: state.lifestyle_type,
       primary_goal: state.primary_goal,
       scores: state.scores,
-      explanation
+      explanation,
+      answers: state.answers
     };
 
     try {
-      await fetch("/api/submit", {
+      const response = await fetch("/api/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ leadData: data, resultData })
       });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        if (errorData.details) {
+          const errorMessages = Object.values(errorData.details).join(", ");
+          alert(`Please fix the following: ${errorMessages}`);
+          setIsSubmitting(false);
+          return;
+        }
+      }
     } catch (error) {
       console.error("Failed to submit lead", error);
     }

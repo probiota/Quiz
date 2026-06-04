@@ -1,7 +1,7 @@
 export const products = {
   "Gut Health+": {
     name: "Gut Health+",
-    url: "https://gutandbeyond.com/products/gut-health-plus",
+    url: "https://gutandbeyond.com/products/gut-health",
     description: "Advanced probiotic formulation for optimal digestive balance.",
     bullets: [
       "Promotes a healthy microbiome",
@@ -11,7 +11,7 @@ export const products = {
   },
   "IBS Relief": {
     name: "IBS Relief",
-    url: "https://gutandbeyond.com/products/ibs-relief",
+    url: "https://gutandbeyond.com/products/the-gut-calm-gummies",
     description: "Targeted support for sensitive digestive systems.",
     bullets: [
       "Soothes the digestive tract",
@@ -31,7 +31,7 @@ export const products = {
   },
   "Magnesium Gummies": {
     name: "Magnesium Gummies",
-    url: "https://gutandbeyond.com/products/magnesium-gummies",
+    url: "https://gutandbeyond.com/products/magnesium-bis-glycinate-gummies",
     description: "Essential mineral support for deep rest and nervous system regulation.",
     bullets: [
       "Promotes deep, restorative sleep",
@@ -51,7 +51,7 @@ export const products = {
   },
   "Eye Essentials Gummies": {
     name: "Eye Essentials Gummies",
-    url: "https://gutandbeyond.com/products/eye-essentials-gummies",
+    url: "https://gutandbeyond.com/products/eye-essentials",
     description: "Lutein and Zeaxanthin formulation for comprehensive vision support.",
     bullets: [
       "Helps filter blue light from screens",
@@ -61,7 +61,7 @@ export const products = {
   },
   "Omega 3 Gummies": {
     name: "Omega 3 Gummies",
-    url: "https://gutandbeyond.com/products/omega-3-gummies",
+    url: "https://gutandbeyond.com/products/omega-3",
     description: "Plant-based essential fatty acids for cognitive and cardiovascular wellness.",
     bullets: [
       "Supports brain health and focus",
@@ -81,7 +81,7 @@ export const products = {
   },
   "All In One Gummies": {
     name: "All In One Gummies",
-    url: "https://gutandbeyond.com/products/all-in-one-gummies",
+    url: "https://gutandbeyond.com/products/all-in-one",
     description: "Comprehensive daily nutrition to cover your wellness baseline.",
     bullets: [
       "Fills dietary nutrient gaps",

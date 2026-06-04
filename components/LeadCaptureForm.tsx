@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { LeadFormData } from "../types";
+import Image from "next/image";
 
 interface LeadCaptureFormProps {
   onSubmit: (data: LeadFormData) => void;
@@ -10,7 +11,8 @@ interface LeadCaptureFormProps {
 
 export function LeadCaptureForm({ onSubmit, isSubmitting = false }: LeadCaptureFormProps) {
   const [formData, setFormData] = useState<LeadFormData>({
-    full_name: "",
+    first_name: "",
+    last_name: "",
     email: "",
     phone: "",
     age_group: "18-24",
@@ -23,19 +25,52 @@ export function LeadCaptureForm({ onSubmit, isSubmitting = false }: LeadCaptureF
   const validate = () => {
     const newErrors: Partial<Record<keyof LeadFormData, string>> = {};
 
-    if (formData.full_name.trim().length < 2) {
-      newErrors.full_name = "Name must be at least 2 characters";
+    // First name validation
+    const firstName = formData.first_name.trim();
+    if (firstName.length < 2) {
+      newErrors.first_name = "First name must be at least 2 characters";
+    } else if (!/^[a-zA-Z\s'-]+$/.test(firstName)) {
+      newErrors.first_name = "Please enter a valid first name";
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const invalidEmails = ["test@", "asdf@", "fake@", "noemail@", "noreply@", "xxx@"];
-    if (!emailRegex.test(formData.email) || invalidEmails.some(inv => formData.email.toLowerCase().startsWith(inv))) {
+    // Last name validation
+    const lastName = formData.last_name.trim();
+    if (lastName.length < 1) {
+      newErrors.last_name = "Last name is required";
+    } else if (!/^[a-zA-Z\s'-]+$/.test(lastName)) {
+      newErrors.last_name = "Please enter a valid last name";
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    const localPart = formData.email.split("@")[0]?.toLowerCase() || "";
+    const domain = formData.email.split("@")[1]?.toLowerCase() || "";
+
+    const fakeLocalParts = ["test", "asdf", "fake", "noemail", "noreply", "xxx", "abc", "xyz", "aaa", "qwerty", "temp", "dummy", "sample"];
+    const disposableDomains = ["mailinator.com", "guerrillamail.com", "tempmail.com", "throwaway.email", "yopmail.com", "sharklasers.com", "grr.la", "discard.email", "trashmail.com", "10minutemail.com", "guerrillamailblock.com"];
+
+    if (!emailRegex.test(formData.email)) {
       newErrors.email = "Please enter a valid email address";
+    } else if (fakeLocalParts.includes(localPart)) {
+      newErrors.email = "Please enter a real email address";
+    } else if (disposableDomains.includes(domain)) {
+      newErrors.email = "Disposable email addresses are not allowed";
     }
 
-    const phoneDigits = formData.phone.replace(/[\s-]/g, "");
+    // Phone validation
+    const phoneDigits = formData.phone.replace(/\D/g, "");
+    const last10 = phoneDigits.slice(-10);
+    const sequentialPatterns = ["1234567890", "0123456789", "9876543210", "0987654321"];
+    const isAllSame = /^(\d)\1{9}$/.test(last10);
+
     if (phoneDigits.length < 10) {
-      newErrors.phone = "Please enter a valid phone number";
+      newErrors.phone = "Please enter a valid 10-digit phone number";
+    } else if (sequentialPatterns.includes(last10)) {
+      newErrors.phone = "Please enter a real phone number";
+    } else if (isAllSame) {
+      newErrors.phone = "Please enter a real phone number";
+    } else if (!/^[6-9]/.test(last10)) {
+      newErrors.phone = "Indian mobile numbers start with 6, 7, 8, or 9";
     }
 
     setErrors(newErrors);
@@ -51,25 +86,48 @@ export function LeadCaptureForm({ onSubmit, isSubmitting = false }: LeadCaptureF
 
   return (
     <div className="w-full flex flex-col justify-center py-8">
-      <h2 className="font-heading text-3xl font-medium text-text-primary mb-2 leading-tight">
+      <div className="flex justify-center mb-6">
+        <Image 
+          src="/logo.png" 
+          alt="Gut & Beyond" 
+          width={180} 
+          height={55} 
+          className="object-contain"
+          priority
+        />
+      </div>
+      <h2 className="font-heading text-3xl font-medium text-text-primary mb-2 leading-tight text-center">
         Get Your Personalized Wellness Report
       </h2>
-      <p className="font-body text-text-secondary text-sm mb-8">
-        We'll send your complete wellness profile and recommendation to your inbox.
+      <p className="font-body text-text-secondary text-sm mb-8 text-center">
+        We will send your complete wellness profile and recommendation to your inbox.
       </p>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        {/* Name */}
-        <div>
-          <input
-            type="text"
-            placeholder="Your full name"
-            className={`w-full h-12 px-4 rounded-xl border bg-card text-text-primary outline-none transition-colors ${errors.full_name ? "border-red-500" : "border-border focus:border-primary"}`}
-            value={formData.full_name}
-            onChange={(e) => setFormData({ ...formData, full_name: e.target.value })}
-            disabled={isSubmitting}
-          />
-          {errors.full_name && <p className="text-red-500 text-xs mt-1 ml-1">{errors.full_name}</p>}
+        {/* First Name & Last Name */}
+        <div className="flex gap-3">
+          <div className="flex-1">
+            <input
+              type="text"
+              placeholder="First name"
+              className={`w-full h-12 px-4 rounded-xl border bg-card text-text-primary outline-none transition-colors ${errors.first_name ? "border-red-500" : "border-border focus:border-primary"}`}
+              value={formData.first_name}
+              onChange={(e) => setFormData({ ...formData, first_name: e.target.value })}
+              disabled={isSubmitting}
+            />
+            {errors.first_name && <p className="text-red-500 text-xs mt-1 ml-1">{errors.first_name}</p>}
+          </div>
+          <div className="flex-1">
+            <input
+              type="text"
+              placeholder="Last name"
+              className={`w-full h-12 px-4 rounded-xl border bg-card text-text-primary outline-none transition-colors ${errors.last_name ? "border-red-500" : "border-border focus:border-primary"}`}
+              value={formData.last_name}
+              onChange={(e) => setFormData({ ...formData, last_name: e.target.value })}
+              disabled={isSubmitting}
+            />
+            {errors.last_name && <p className="text-red-500 text-xs mt-1 ml-1">{errors.last_name}</p>}
+          </div>
         </div>
 
         {/* Email */}
@@ -107,10 +165,10 @@ export function LeadCaptureForm({ onSubmit, isSubmitting = false }: LeadCaptureF
               onChange={(e) => setFormData({ ...formData, age_group: e.target.value as LeadFormData["age_group"] })}
               disabled={isSubmitting}
             >
-              <option value="18-24">18–24</option>
-              <option value="25-34">25–34</option>
-              <option value="35-44">35–44</option>
-              <option value="45-54">45–54</option>
+              <option value="18-24">18-24</option>
+              <option value="25-34">25-34</option>
+              <option value="35-44">35-44</option>
+              <option value="45-54">45-54</option>
               <option value="55+">55+</option>
             </select>
           </div>
@@ -156,12 +214,12 @@ export function LeadCaptureForm({ onSubmit, isSubmitting = false }: LeadCaptureF
             </svg>
           </div>
           <span className="font-body text-text-primary text-sm leading-relaxed flex-1 group-hover:text-primary transition-colors">
-            Yes, I'd like a personalized wellness plan sent to my email.
+            Yes, I would like a personalized wellness plan sent to my email.
           </span>
         </label>
 
         <p className="font-body text-text-secondary text-[11px] leading-tight mt-1 mb-6">
-          Your information is secure and will never be shared. By submitting, you agree to receive wellness guidance from Gut & Beyond.
+          Your information is secure and will never be shared. By submitting, you agree to receive wellness guidance from Gut &amp; Beyond.
         </p>
 
         <button

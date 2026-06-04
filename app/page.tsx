@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { useQuiz } from "../lib/QuizContext";
 import { motion } from "framer-motion";
 
+import Image from "next/image";
+
 export default function WelcomePage() {
   const router = useRouter();
   const { dispatch } = useQuiz();
@@ -26,17 +28,15 @@ export default function WelcomePage() {
         transition={{ duration: 0.6 }}
         className="w-full max-w-md flex flex-col items-center"
       >
-        <div className="mb-12">
-          <h2 className="font-heading text-2xl font-bold tracking-widest text-primary uppercase">Gut & Beyond</h2>
-        </div>
-        
-        <div className="w-24 h-24 mb-10 text-primary opacity-80">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 22C12 22 20 18 20 12V5L12 2L4 5V12C4 18 12 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M12 22V2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M12 12C12 12 16.5 10 18.5 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M12 12C12 12 7.5 10 5.5 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
+        <div className="mb-10 mt-4">
+          <Image 
+            src="/logo.png" 
+            alt="Gut & Beyond" 
+            width={220} 
+            height={70} 
+            className="object-contain"
+            priority
+          />
         </div>
 
         <h1 className="font-heading text-[32px] font-semibold text-text-primary leading-tight mb-4">
