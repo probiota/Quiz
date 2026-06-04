@@ -1,5 +1,5 @@
 import { QuizAnswer, ScoreBuckets, ConcernType, Gender } from '../types';
-import { questions, utiQuestion } from './questions';
+import { questions } from './questions';
 
 export function calculateScores(answers: QuizAnswer[]): ScoreBuckets {
   const scores: ScoreBuckets = {
@@ -7,7 +7,7 @@ export function calculateScores(answers: QuizAnswer[]): ScoreBuckets {
     eye: 0, recovery: 0, omega: 0, general: 0, uti: 0
   };
 
-  const allQuestions = [...questions, utiQuestion];
+  const allQuestions = [...questions];
 
   answers.forEach((answer) => {
     const question = allQuestions.find((q) => q.id === answer.questionId);

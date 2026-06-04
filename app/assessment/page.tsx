@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useQuiz } from "../../lib/QuizContext";
-import { questions, utiQuestion } from "../../lib/questions";
+import { questions } from "../../lib/questions";
 import { getDerivedFields, getRecommendation } from "../../lib/scoring";
 import { generateExplanation } from "../../lib/explanations";
 import { QuestionCard } from "../../components/QuestionCard";

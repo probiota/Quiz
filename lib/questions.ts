@@ -1,52 +1,31 @@
 export const questions = [
   {
     id: 1,
-    text: "What would make the biggest difference in your life right now?",
+    text: "What is your primary health and wellness goal right now?",
     options: [
-      { text: "Better digestion", scores: { gut: 3 } },
-      { text: "Less stress", scores: { stress: 3 } },
-      { text: "Better sleep", scores: { sleep: 3 } },
-      { text: "More energy", scores: { energy: 3 } },
-      { text: "Better focus", scores: { omega: 2, eye: 1 } },
-      { text: "Less joint discomfort", scores: { recovery: 3 } },
-      { text: "Better overall health", scores: { general: 3 } }
+      { text: "Better Digestion", scores: { gut: 5 }, goalTag: "Better Digestion" },
+      { text: "Less Stress & Anxiety", scores: { stress: 5 }, goalTag: "Less Stress" },
+      { text: "Better Sleep & Recovery", scores: { sleep: 5, recovery: 3 }, goalTag: "Better Sleep" },
+      { text: "More Energy & Focus", scores: { energy: 5, omega: 2 }, goalTag: "More Energy" },
+      { text: "Weight Management", scores: { general: 5 }, goalTag: "Weight Management" },
+      { text: "Muscle & Joint Support", scores: { recovery: 5 }, goalTag: "Muscle Gain" }
     ]
   },
   {
     id: 2,
-    text: "How do you usually feel when you wake up?",
+    text: "Which of these do you struggle with the most on a daily basis?",
     options: [
-      { text: "Refreshed and energetic", scores: {} },
-      { text: "Slightly tired", scores: { energy: 1 } },
-      { text: "Tired most mornings", scores: { energy: 2, sleep: 1 } },
-      { text: "Exhausted even after sleep", scores: { energy: 3, sleep: 2 } }
+      { text: "Frequent Bloating or Discomfort after meals", scores: { gut: 3, ibs: 3 } },
+      { text: "Brain Fog or Poor Focus", scores: { omega: 3, energy: 2 } },
+      { text: "Exhaustion and Low Energy", scores: { energy: 4 } },
+      { text: "Eye Strain from Screens", scores: { eye: 4 } },
+      { text: "Joint Discomfort or Slow Recovery", scores: { recovery: 4 } },
+      { text: "Difficulty Switching Off or Poor Sleep", scores: { sleep: 3, stress: 2 } }
     ]
   },
   {
     id: 3,
-    text: "Which situation sounds most like you?",
-    options: [
-      { text: "I often feel bloated after meals", scores: { gut: 3, ibs: 2 } },
-      { text: "I feel stressed even on normal days", scores: { stress: 3 } },
-      { text: "I struggle to switch off at night", scores: { sleep: 3, stress: 2 } },
-      { text: "I hit an energy crash during the day", scores: { energy: 3 } },
-      { text: "My eyes feel strained after screens", scores: { eye: 3 } },
-      { text: "My joints feel stiff or uncomfortable", scores: { recovery: 3 } }
-    ]
-  },
-  {
-    id: 4,
-    text: "How many hours do you spend looking at screens daily?",
-    options: [
-      { text: "Less than 2 hours", scores: {} },
-      { text: "2-4 hours", scores: { eye: 1 } },
-      { text: "4-8 hours", scores: { eye: 2 } },
-      { text: "8+ hours", scores: { eye: 3 } }
-    ]
-  },
-  {
-    id: 5,
-    text: "Which best describes your lifestyle?",
+    text: "Which best describes you?",
     options: [
       { text: "Student", scores: { eye: 1, stress: 1 }, lifestyleTag: "Student" },
       { text: "Office Professional", scores: { eye: 2, stress: 1 }, lifestyleTag: "Office Professional" },
@@ -57,70 +36,23 @@ export const questions = [
     ]
   },
   {
-    id: 6,
-    text: "How often do you feel stressed or overwhelmed?",
+    id: 4,
+    text: "How often do you experience digestive discomfort or bloating?",
     options: [
-      { text: "Rarely", scores: {} },
-      { text: "Sometimes", scores: { stress: 1 } },
-      { text: "Often", scores: { stress: 2 } },
-      { text: "Almost every day", scores: { stress: 3 } }
+      { text: "Rarely or Never", scores: {} },
+      { text: "Occasionally", scores: { gut: 2 } },
+      { text: "Frequently", scores: { gut: 3, ibs: 2 } },
+      { text: "Almost every time I eat", scores: { gut: 4, ibs: 4 } }
     ]
   },
   {
-    id: 7,
-    text: "How often do you experience digestive discomfort after meals?",
+    id: 5,
+    text: "How do you usually feel when waking up and throughout the day?",
     options: [
-      { text: "Never", scores: {} },
-      { text: "Occasionally", scores: { gut: 1 } },
-      { text: "Frequently", scores: { gut: 2, ibs: 1 } },
-      { text: "Almost daily", scores: { gut: 3, ibs: 3 } }
-    ]
-  },
-  {
-    id: 8,
-    text: "Which best describes your diet?",
-    options: [
-      { text: "Very balanced", scores: {} },
-      { text: "Mostly balanced", scores: { general: 1 } },
-      { text: "Could be better", scores: { general: 2, energy: 1 } },
-      { text: "I frequently skip meals or eat on the go", scores: { energy: 3, general: 2 } }
-    ]
-  },
-  {
-    id: 9,
-    text: "What is your primary health or fitness goal?",
-    options: [
-      { text: "Weight Management", scores: { general: 5 }, goalTag: "Weight Management" },
-      { text: "Muscle Gain", scores: { recovery: 5 }, goalTag: "Muscle Gain" },
-      { text: "Better Recovery", scores: { recovery: 6 }, goalTag: "Better Recovery" },
-      { text: "Better Heart Health", scores: { omega: 6 }, goalTag: "Better Heart Health" },
-      { text: "Better Digestion", scores: { gut: 5 }, goalTag: "Better Digestion" },
-      { text: "Better Sleep", scores: { sleep: 6 }, goalTag: "Better Sleep" },
-      { text: "Better Overall Wellness", scores: { general: 5 }, goalTag: "Better Overall Wellness" }
-    ]
-  },
-  {
-    id: 10,
-    text: "Which of these do you experience most often?",
-    options: [
-      { text: "Brain Fog", scores: { omega: 2, energy: 1 } },
-      { text: "Low Energy", scores: { energy: 3 } },
-      { text: "Poor Sleep", scores: { sleep: 3 } },
-      { text: "Bloating", scores: { gut: 3, ibs: 2 } },
-      { text: "Eye Strain", scores: { eye: 3 } },
-      { text: "Joint Discomfort", scores: { recovery: 3 } },
-      { text: "Frequent Stress", scores: { stress: 3 } }
+      { text: "Refreshed and calm", scores: {} },
+      { text: "Tired in the mornings but fine later", scores: { sleep: 2, energy: 1 } },
+      { text: "Frequent energy crashes and occasional stress", scores: { energy: 3, stress: 2 } },
+      { text: "Exhausted and stressed almost every day", scores: { sleep: 3, stress: 4, energy: 2 } }
     ]
   }
 ];
-
-export const utiQuestion = {
-  id: 11,
-  text: "Have you experienced urinary discomfort or recurring UTI concerns in the past year?",
-  options: [
-    { text: "Never", scores: {} },
-    { text: "Once", scores: { uti: 1 } },
-    { text: "Occasionally", scores: { uti: 2 } },
-    { text: "Frequently", scores: { uti: 4 } }
-  ]
-};
