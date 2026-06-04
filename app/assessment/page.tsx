@@ -95,13 +95,15 @@ export default function AssessmentPage() {
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
+        const errorData = await response.json().catch(() => ({ error: "Unknown error" }));
         if (errorData.details) {
           const errorMessages = Object.values(errorData.details).join(", ");
           alert(`Please fix the following: ${errorMessages}`);
-          setIsSubmitting(false);
-          return;
+        } else {
+          alert(errorData.error || "An error occurred while submitting. Please try again.");
         }
+        setIsSubmitting(false);
+        return;
       }
     } catch (error) {
       console.error("Failed to submit lead", error);
