@@ -8,21 +8,14 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 
-const COLORS = ['#1A1A1A', '#4A4A4A', '#717171', '#A0A0A0', '#D0D0D0'];
+import { questions } from "../../lib/questions";
 
-const QUESTION_MAP: Record<number, string> = {
-  1: "What would make the biggest difference in your life right now?",
-  2: "How do you usually feel when you wake up?",
-  3: "Which situation sounds most like you?",
-  4: "How many hours do you spend looking at screens daily?",
-  5: "Which best describes your lifestyle?",
-  6: "How often do you feel stressed or overwhelmed?",
-  7: "How often do you experience digestive discomfort after meals?",
-  8: "Which best describes your diet?",
-  9: "What is your primary health or fitness goal?",
-  10: "Which of these do you experience most often?",
-  11: "Have you experienced urinary discomfort or recurring UTI concerns in the past year?"
-};
+const COLORS = ['#10B981', '#3B82F6', '#8B5CF6', '#F59E0B', '#EF4444', '#EC4899', '#14B8A6'];
+
+const QUESTION_MAP: Record<number, string> = questions.reduce((acc, q) => {
+  acc[q.id] = q.text;
+  return acc;
+}, {} as Record<number, string>);
 
 export default function AdminDashboard() {
   const [stats, setStats] = useState<any>(null);
@@ -154,7 +147,11 @@ export default function AdminDashboard() {
                     cursor={{ fill: '#F7F5F0' }}
                     contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}
                   />
-                  <Bar dataKey="count" fill="#1A1A1A" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="count" radius={[4, 4, 0, 0]}>
+                    {(stats?.recent_leads_trend || []).map((entry: any, index: number) => (
+                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    ))}
+                  </Bar>
                 </BarChart>
               </ResponsiveContainer>
             </div>

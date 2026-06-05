@@ -72,8 +72,14 @@ function isValidPhone(phone: string): { valid: boolean; error?: string } {
     return { valid: false, error: "Please enter a real phone number" };
   }
 
-  // Reject all same digits (e.g. 0000000000, 1111111111)
-  if (/^(\d)\1{9}$/.test(last10)) {
+    // Reject repeating patterns like 9898989898, 9879879879, etc.
+  if (/^(\d{2,5})\1+$/.test(last10)) {
+    return { valid: false, error: "Please enter a real phone number" };
+  }
+
+  // Reject common dummy numbers often used in testing
+  const dummyNumbers = ["9999999999", "8888888888", "9876543210", "1234567890", "9000000000"];
+  if (dummyNumbers.includes(last10)) {
     return { valid: false, error: "Please enter a real phone number" };
   }
 
@@ -112,6 +118,11 @@ export async function POST(req: Request) {
 
     const phoneCheck = isValidPhone(leadData.phone || "");
     if (!phoneCheck.valid) validationErrors.phone = phoneCheck.error!;
+
+    // Harden against empty/skipped quiz submissions
+    if (!resultData || !resultData.answers || resultData.answers.length < 5) {
+      validationErrors.quiz = "Quiz must be fully completed before submission.";
+    }
 
     if (Object.keys(validationErrors).length > 0) {
       return NextResponse.json(

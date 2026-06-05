@@ -61,13 +61,14 @@ export function LeadCaptureForm({ onSubmit, isSubmitting = false }: LeadCaptureF
     const phoneDigits = formData.phone.replace(/\D/g, "");
     const last10 = phoneDigits.slice(-10);
     const sequentialPatterns = ["1234567890", "0123456789", "9876543210", "0987654321"];
-    const isAllSame = /^(\d)\1{9}$/.test(last10);
+    const dummyNumbers = ["9999999999", "8888888888", "9876543210", "1234567890", "9000000000"];
+    const isRepeating = /^(\d{2,5})\1+$/.test(last10);
 
     if (phoneDigits.length < 10) {
       newErrors.phone = "Please enter a valid 10-digit phone number";
-    } else if (sequentialPatterns.includes(last10)) {
+    } else if (sequentialPatterns.includes(last10) || dummyNumbers.includes(last10)) {
       newErrors.phone = "Please enter a real phone number";
-    } else if (isAllSame) {
+    } else if (isRepeating) {
       newErrors.phone = "Please enter a real phone number";
     } else if (!/^[6-9]/.test(last10)) {
       newErrors.phone = "Indian mobile numbers start with 6, 7, 8, or 9";
