@@ -31,7 +31,7 @@ export default function AssessmentPage() {
     }
   }, [state.phase, router]);
 
-  // If we are past the base 10 questions, but haven't captured lead yet
+  // If we are past all quiz questions, but haven't captured lead yet
   useEffect(() => {
     if (state.phase === "questions" && state.current_question > questions.length) {
       dispatch({ type: "SET_PHASE", payload: "lead_capture" });

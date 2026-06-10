@@ -44,7 +44,7 @@ export default function WelcomePage() {
         </h1>
         
         <p className="font-body text-base text-text-secondary leading-relaxed mb-8">
-          Answer 10 short questions and receive a science-backed wellness recommendation tailored to your lifestyle and goals.
+          Answer 5 short questions and receive a science-backed wellness recommendation tailored to your lifestyle and goals.
         </p>
         
         <p className="font-body text-[13px] text-text-secondary/70 mb-10">

@@ -4,17 +4,11 @@ import Papa from "papaparse";
 
 // Question labels for CSV column headers
 const QUESTION_LABELS: Record<number, string> = {
-  1: "Q1 - Biggest Difference",
-  2: "Q2 - Wake Up Feeling",
-  3: "Q3 - Situation Like You",
-  4: "Q4 - Screen Hours",
-  5: "Q5 - Lifestyle",
-  6: "Q6 - Stress Frequency",
-  7: "Q7 - Digestive Discomfort",
-  8: "Q8 - Diet",
-  9: "Q9 - Health Goal",
-  10: "Q10 - Most Often Experience",
-  11: "Q11 - UTI Concerns"
+  1: "Q1 - Primary Health Goal",
+  2: "Q2 - Daily Struggle",
+  3: "Q3 - Lifestyle Type",
+  4: "Q4 - Digestive Discomfort",
+  5: "Q5 - Energy & Wake Up Feeling"
 };
 
 export async function GET() {
@@ -39,9 +33,9 @@ export async function GET() {
 
     // Flatten each lead into a flat row with individual answer + score columns
     const flattenedLeads = leads.map((lead: any) => {
-      // Build answer columns (Q1 through Q11)
+      // Build answer columns (Q1 through Q5)
       const answerColumns: Record<string, string> = {};
-      for (let qId = 1; qId <= 11; qId++) {
+      for (let qId = 1; qId <= 5; qId++) {
         const colName = QUESTION_LABELS[qId] || `Q${qId}`;
         if (lead.quiz_answers && Array.isArray(lead.quiz_answers)) {
           const answer = lead.quiz_answers.find((a: any) => a.questionId === qId);
